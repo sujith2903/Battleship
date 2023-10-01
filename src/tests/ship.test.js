@@ -17,3 +17,10 @@ test('Test if ship is sunk', () => {
     testShip.hit()
     expect(testShip.isSunk()).toBeTruthy();
 })
+
+test('Test number of hits', () => {
+    let testShip = ship(5)
+    testShip.hit()
+    testShip.hit()
+    expect(testShip.getHits()).toBe(2)
+})

@@ -1,7 +1,8 @@
-const ship = function (length) {
+const ship = function (length, name) {
     
     let hits = 0;
     let sunk = false;
+    let shipName = name
 
     function hit() {
         hits += 1;
@@ -24,7 +25,8 @@ const ship = function (length) {
         hit,
         getHits,
         isSunk,
-        length
+        length,
+        shipName
     }
 }
 

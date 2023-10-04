@@ -57,6 +57,18 @@ test('Check if a ship is attacked', () => {
     expect(testShip.getHits()).toBe(2)
 })
 
+test('Check if a ship is attacked', () => {
+    let testShip1 = ship(3, 'Destroyer')
+    let testShip2 = ship(4, 'Battleship')
+    let board = gameBoard()
+    board.createBoard()
+    board.placeShip(0, 0, testShip1, 'Vertical')
+    board.placeShip(0, 1, testShip2, 'Horizontal')
+    board.receiveAttack(0, 1)
+    board.receiveAttack(0, 2)
+    expect(testShip2.getHits()).toBe(2)
+})
+
 test('Check if all ships are sunk', () => {
     let testShip1 = ship(3, 'Destroyer')
     let testShip2 = ship(4, 'Battleship')

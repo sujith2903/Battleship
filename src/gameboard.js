@@ -2,6 +2,10 @@ import ship from "./ship"
 const gameBoard = function () {
     
     let board = []
+    let missedAttack = []
+    let attackedPosition = []
+    let shipPosition = []
+    let ships = []
 
     function createCoordinate(coordinates, name) {
         return {coordinates,name}
@@ -35,6 +39,7 @@ const gameBoard = function () {
             
             for (let i = 0; i < ship.length; i++){
                 board[index + i].name = ship.shipName
+                shipPosition.push(index + i)
             }
         }
         
@@ -46,8 +51,36 @@ const gameBoard = function () {
             let index = indexFinder(pos1, pos2)
 
              for (let i = 0; i < ship.length; i++){
-                board[index + i * 10].name = ship.shipName
+                 board[index + i * 10].name = ship.shipName
+                 shipPosition.push(index + i * 10)
             }
+        }
+        ships.push(ship)
+    }
+
+    function receiveAttack(pos1, pos2) {
+        
+        let index = indexFinder(pos1, pos2)
+
+        if (board[index].name != null) {
+            attackedPosition.push(index)
+            findShip(board[index].name).hit()
+        } else {
+            missedAttack.push(index)
+        }
+    }
+
+    function findShip(name) {
+        for (let i = 0; i < ships.length; i++){
+            if (ships[i].shipName == name) {
+                return ships[i]
+            }
+        }
+    }
+
+    function isAllSunk() {
+        if (shipPosition.length == attackedPosition.length) {
+            return true
         }
     }
 
@@ -55,10 +88,26 @@ const gameBoard = function () {
         return board
     }
 
+    function getMissedPositions() {
+        return missedAttack
+    }
+
+    function getShipsPositions() {
+        return shipPosition
+    }
+
+    function getAttackedPositions() {
+        return attackedPosition
+    }
     return {
         createBoard,
         getBoard,
-        placeShip
+        placeShip,
+        receiveAttack,
+        isAllSunk,
+        getMissedPositions,
+        getAttackedPositions,
+        getShipsPositions,
     }
 }
 

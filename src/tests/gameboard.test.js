@@ -85,3 +85,13 @@ test('Check if all ships are sunk', () => {
     board.receiveAttack(0, 4)
     expect(board.isAllSunk()).toBe(true)
 })
+
+test('Check if ship positions are correct', () => {
+    let testShip = ship(3, 'Destroyer')
+    let board = gameBoard()
+    board.createBoard()
+    board.placeShip(0, 0, testShip, 'Vertical')
+    expect(board.getShipsPositions()).toContain(0)
+    expect(board.getShipsPositions()).toContain(10)
+    expect(board.getShipsPositions()).toContain(20)
+})

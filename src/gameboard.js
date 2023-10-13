@@ -68,6 +68,7 @@ const gameBoard = function () {
         } else {
             missedAttack.push(index)
         }
+        return index
     }
 
     function findShip(name) {

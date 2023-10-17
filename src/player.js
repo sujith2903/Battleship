@@ -1,5 +1,5 @@
-import ship from "../ship";
-import gameBoard from "../gameboard";
+import ship from "./ship";
+import gameBoard from "./gameboard";
 
 const player = function () {
 

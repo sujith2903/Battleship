@@ -4,3 +4,19 @@
 .show{
     display: block;
 }
+
+.boards{
+    display: flex;
+    gap:50px;
+}
+
+.player-board, .computer-board{
+    display: grid;
+    grid-template-columns: repeat(10, 0fr);
+}
+
+.grid{
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+}

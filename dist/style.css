@@ -1,22 +1,23 @@
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
-.show{
-    display: block;
-}
-
-.boards{
-    display: flex;
-    gap:50px;
+.show {
+  display: block;
 }
 
-.player-board, .computer-board{
-    display: grid;
-    grid-template-columns: repeat(10, 0fr);
+.boards {
+  display: flex;
+  gap: 50px;
 }
 
-.grid{
-    border: 1px solid black;
-    width: 50px;
-    height: 50px;
+.player-board,
+.computer-board {
+  display: grid;
+  grid-template-columns: repeat(10, 0fr);
+}
+
+.grid {
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
 }

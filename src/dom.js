@@ -1,52 +1,65 @@
 import ship from "./ship";
 import gameBoard from "./gameboard";
 import player from "./player";
+import game from "./game";
 
 const dom = (function () {
+  const carrier = document.querySelector(".carrier-name");
+  const battleship = document.querySelector(".battleship-name");
+  const cruiser = document.querySelector(".cruiser-name");
+  const submarine = document.querySelector(".submarine-name");
+  const destroyer = document.querySelector(".destroyer-name");
+  const playerBoardDiv = document.querySelector(".player-board");
+  const computerBoardDiv = document.querySelector(".computer-board");
 
-    const carrier = document.querySelector('.carrier-name')
-    const battleship = document.querySelector('.battleship-name')
-    const cruiser = document.querySelector('.cruiser-name')
-    const submarine = document.querySelector('.submarine-name')
-    const destroyer = document.querySelector('.destroyer-name')
-    const playerBoard = document.querySelector('.player-board')
-    const computerBoard = document.querySelector('.computer-board')
-    
-    function hideDisplay(element) {
-        element.classList.remove("show")
-        element.classList.add("hide")
+  let gamerBoard = game.getGamerBoard();
+  let computerBoard = game.getComputerBoard();
+
+  function hideDisplay(element) {
+    element.classList.remove("show");
+    element.classList.add("hide");
+  }
+
+  function showDisplay(element) {
+    element.classList.remove("hide");
+    element.classList.add("show");
+  }
+
+  function createGameBoards() {
+    for (let i = 0; i < gamerBoard.length; i++) {
+      let grid = document.createElement("div");
+      grid.classList.add(i);
+      grid.classList.add(gamerBoard[i].coordinates);
+      grid.classList.add("grid");
+      grid.classList.add("player-board");
+      playerBoardDiv.appendChild(grid);
     }
-
-    function showDisplay(element) {
-        element.classList.remove("hide")
-        element.classList.add("show")
+    for (let i = 0; i < computerBoard.length; i++) {
+      let grid = document.createElement("div");
+      grid.classList.add(i);
+      grid.classList.add(computerBoard[i].coordinates);
+      grid.classList.add("grid");
+      grid.classList.add("computer-board");
+      computerBoardDiv.appendChild(grid);
     }
+  }
 
-    function createGameBoards() {
-        
-        let board = gameBoard().createBoard()
+  function assignShips(pos1, pos2) {}
 
-        for (let i = 0; i < board.length; i++){
-            let grid = document.createElement('div')
-            grid.classList.add(i)
-            grid.classList.add('grid')
-            grid.classList.add('player-board')
-            playerBoard.appendChild(grid)
-        }
-        for (let i = 0; i < board.length; i++){
-            let grid = document.createElement('div')
-            grid.classList.add(i)
-            grid.classList.add('grid')
-            grid.classList.add('computer-board')
-            computerBoard.appendChild(grid)
-        }
+  playerBoardDiv.addEventListener("click", (grid) => {
+    if (grid.target.classList.contains("player-board")) {
+      let coordinates = grid.target.classList[1].split(",");
+      let pos1 = parseInt(coordinates[0]);
+      let pos2 = parseInt(coordinates[1]);
+      assignShips(pos1, pos2);
     }
+  });
 
-    return {
-        hideDisplay,
-        showDisplay,
-        createGameBoards
-    }
-})()
+  return {
+    hideDisplay,
+    showDisplay,
+    createGameBoards,
+  };
+})();
 
-export default dom
+export default dom;

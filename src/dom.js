@@ -47,28 +47,76 @@ const dom = (function () {
     }
   }
 
-  playerBoardDiv.addEventListener("click", (grid) => {
-    if (grid.target.classList.contains("player-board")) {
-      let coordinates = grid.target.classList[1].split(",");
-      let pos1 = parseInt(coordinates[0]);
-      let pos2 = parseInt(coordinates[1]);
-      if (gamerShips.length > 0) {
-        let currentShip = gamerShips[0];
-        if (
-          game.gamer.placeShip(
-            pos1,
-            pos2,
-            currentShip,
-            directionButton.value
-          ) != false
-        ) {
-          console.log(gamerBoard);
-          gamerShips.shift();
-          console.log(game.getGamerShips());
-        }
+  function getCoordinates(target) {
+    let coordinates = target.classList[1].split(",");
+    let pos1 = parseInt(coordinates[0]);
+    let pos2 = parseInt(coordinates[1]);
+
+    return [pos1, pos2];
+  }
+
+  function addValidityColor(cell) {
+    cell.classList.add("green");
+  }
+
+  function removeValidityColor(cell) {
+    cell.classList.remove("green");
+    cell.classList.remove("red");
+  }
+
+  function addNonValidityColor(cell) {
+    cell.classList.add("red");
+  }
+
+  (function playerBoardEvents() {
+    let currentShip = gamerShips[0];
+    let pos1;
+    let pos2;
+
+    function checkValidity(target) {
+      pos1 = getCoordinates(target)[0];
+      pos2 = getCoordinates(target)[1];
+      if (
+        gamerShips.length > 0 &&
+        game.gamer.placeShip(pos1, pos2, currentShip, directionButton.value) !=
+          false
+      ) {
+        return true;
+      } else {
+        return false;
       }
     }
-  });
+
+    playerBoardDiv.addEventListener("click", (grid) => {
+      if (grid.target.classList.contains("player-board")) {
+        let target = grid.target;
+        if (checkValidity(target)) {
+          gamerShips.shift();
+          currentShip = gamerShips[0];
+          console.log(gamerShips);
+          console.log(gamerBoard);
+        }
+      }
+    });
+
+    playerBoardDiv.addEventListener("mouseover", (grid) => {
+      if (grid.target.classList.contains("grid")) {
+        let target = grid.target;
+        if (checkValidity(target)) {
+          addValidityColor(target);
+        } else if (!checkValidity(target) && gamerShips.length > 0) {
+          addNonValidityColor(target);
+        }
+      }
+    });
+
+    playerBoardDiv.addEventListener("mouseout", (grid) => {
+      if (grid.target.classList.contains("grid")) {
+        let target = grid.target;
+        removeValidityColor(target);
+      }
+    });
+  })();
 
   directionButton.addEventListener("click", () => {
     if (directionButton.value == "Horizontal") {

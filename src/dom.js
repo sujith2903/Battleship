@@ -11,9 +11,12 @@ const dom = (function () {
   const destroyer = document.querySelector(".destroyer-name");
   const playerBoardDiv = document.querySelector(".player-board");
   const computerBoardDiv = document.querySelector(".computer-board");
+  const directionButton = document.querySelector(".direction");
 
   let gamerBoard = game.getGamerBoard();
   let computerBoard = game.getComputerBoard();
+  let gamerShips = game.getGamerShips();
+  let computerShips = game.getComputerShips();
 
   function hideDisplay(element) {
     element.classList.remove("show");
@@ -52,6 +55,16 @@ const dom = (function () {
       let pos1 = parseInt(coordinates[0]);
       let pos2 = parseInt(coordinates[1]);
       assignShips(pos1, pos2);
+    }
+  });
+
+  directionButton.addEventListener("click", () => {
+    if (directionButton.value == "Horizontal") {
+      directionButton.value = "Vertical";
+      directionButton.textContent = "Set Horizontal";
+    } else {
+      directionButton.value = "Horizontal";
+      directionButton.textContent = "Set Vertical";
     }
   });
 

@@ -11,6 +11,8 @@ const game = (function () {
 
   let gamerBoard = gamer.getBoard();
   let computerBoard = computer.getBoard();
+  let gamerShips = gamer.getShips();
+  let computerShips = computer.getShips();
 
   function getGamerBoard() {
     return gamerBoard;
@@ -20,11 +22,21 @@ const game = (function () {
     return computerBoard;
   }
 
+  function getGamerShips() {
+    return gamerShips;
+  }
+
+  function getComputerShips() {
+    return computerShips;
+  }
+
   return {
     gamer,
     computer,
     getGamerBoard,
     getComputerBoard,
+    getGamerShips,
+    getComputerShips,
   };
 })();
 

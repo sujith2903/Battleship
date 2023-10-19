@@ -29,7 +29,7 @@ const gameBoard = function () {
 
   function placeShip(pos1, pos2, ship, direction) {
     if (direction == "Horizontal") {
-      if (pos1 + ship.length > 9) {
+      if (pos2 + ship.length > 10) {
         return false;
       }
 
@@ -42,7 +42,7 @@ const gameBoard = function () {
     }
 
     if (direction == "Vertical") {
-      if (pos2 + ship.length > 9) {
+      if (pos1 + ship.length > 10) {
         return false;
       }
 

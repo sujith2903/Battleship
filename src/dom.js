@@ -15,8 +15,8 @@ const dom = (function () {
 
   let gamerBoard = game.getGamerBoard();
   let computerBoard = game.getComputerBoard();
-  let gamerShips = game.getGamerShips();
-  let computerShips = game.getComputerShips();
+  let gamerShips = [...game.getGamerShips()];
+  let computerShips = [...game.getComputerShips()];
 
   function hideDisplay(element) {
     element.classList.remove("show");
@@ -47,14 +47,26 @@ const dom = (function () {
     }
   }
 
-  function assignShips(pos1, pos2) {}
-
   playerBoardDiv.addEventListener("click", (grid) => {
     if (grid.target.classList.contains("player-board")) {
       let coordinates = grid.target.classList[1].split(",");
       let pos1 = parseInt(coordinates[0]);
       let pos2 = parseInt(coordinates[1]);
-      assignShips(pos1, pos2);
+      if (gamerShips.length > 0) {
+        let currentShip = gamerShips[0];
+        if (
+          game.gamer.placeShip(
+            pos1,
+            pos2,
+            currentShip,
+            directionButton.value
+          ) != false
+        ) {
+          console.log(gamerBoard);
+          gamerShips.shift();
+          console.log(game.getGamerShips());
+        }
+      }
     }
   });
 

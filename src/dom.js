@@ -73,27 +73,15 @@ const dom = (function () {
     let pos1;
     let pos2;
 
-    function checkValidity(target) {
-      pos1 = getCoordinates(target)[0];
-      pos2 = getCoordinates(target)[1];
-      if (
-        gamerShips.length > 0 &&
-        game.gamer.placeShip(pos1, pos2, currentShip, directionButton.value) !=
-          false
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
     playerBoardDiv.addEventListener("click", (grid) => {
       if (grid.target.classList.contains("player-board")) {
         let target = grid.target;
-        if (checkValidity(target)) {
+        pos1 = getCoordinates(target)[0];
+        pos2 = getCoordinates(target)[1];
+        if (gamerShips.length > 0) {
+          game.gamer.placeShip(pos1, pos2, currentShip, directionButton.value);
           gamerShips.shift();
           currentShip = gamerShips[0];
-          console.log(gamerShips);
           console.log(gamerBoard);
         }
       }
@@ -102,9 +90,19 @@ const dom = (function () {
     playerBoardDiv.addEventListener("mouseover", (grid) => {
       if (grid.target.classList.contains("grid")) {
         let target = grid.target;
-        if (checkValidity(target)) {
+        pos1 = getCoordinates(target)[0];
+        pos2 = getCoordinates(target)[1];
+        if (
+          gamerShips.length > 0 &&
+          game.gamer.checkValidity(
+            pos1,
+            pos2,
+            currentShip,
+            directionButton.value
+          )
+        ) {
           addValidityColor(target);
-        } else if (!checkValidity(target) && gamerShips.length > 0) {
+        } else if (gamerShips.length > 0) {
           addNonValidityColor(target);
         }
       }

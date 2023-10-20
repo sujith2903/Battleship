@@ -38,6 +38,7 @@ const player = function () {
     createBoard: board.createBoard,
     getBoard: board.getBoard,
     placeShip: board.placeShip,
+    checkValidity: board.checkValidity,
     receiveAttack: board.receiveAttack,
     isAllSunk: board.isAllSunk,
     getMissedPositions: board.getMissedPositions,

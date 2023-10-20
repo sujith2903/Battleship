@@ -27,33 +27,46 @@ const gameBoard = function () {
     return board;
   }
 
-  function placeShip(pos1, pos2, ship, direction) {
-    if (direction == "Horizontal") {
-      if (pos2 + ship.length > 10) {
-        return false;
-      }
+  function checkValidity(pos1, pos2, ship, direction) {
+    if (direction == "Horizontal" && pos2 + ship.length > 10) {
+      return false;
+    }
 
+    if (direction == "Vertical" && pos1 + ship.length > 10) {
+      return false;
+    }
+    return true;
+  }
+
+  function placeShip(pos1, pos2, ship, direction) {
+    if (
+      direction == "Horizontal" &&
+      checkValidity(pos1, pos2, ship, direction)
+    ) {
       let index = indexFinder(pos1, pos2);
 
       for (let i = 0; i < ship.length; i++) {
         board[index + i].name = ship.shipName;
-        shipPosition.push(index + i);
+        if (!shipPosition.includes(index + i)) {
+          shipPosition.push(index + i);
+          console.log(shipPosition);
+        }
+        ships.push(ship);
       }
     }
 
-    if (direction == "Vertical") {
-      if (pos1 + ship.length > 10) {
-        return false;
-      }
-
+    if (direction == "Vertical" && checkValidity(pos1, pos2, ship, direction)) {
       let index = indexFinder(pos1, pos2);
 
       for (let i = 0; i < ship.length; i++) {
         board[index + i * 10].name = ship.shipName;
-        shipPosition.push(index + i * 10);
+        if (!shipPosition.includes(index + i)) {
+          shipPosition.push(index + i * 10);
+          console.log(shipPosition);
+        }
       }
+      ships.push(ship);
     }
-    ships.push(ship);
   }
 
   function receiveAttack(pos1, pos2) {
@@ -100,6 +113,7 @@ const gameBoard = function () {
   return {
     createBoard,
     getBoard,
+    checkValidity,
     placeShip,
     receiveAttack,
     isAllSunk,

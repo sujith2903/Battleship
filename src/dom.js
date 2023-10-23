@@ -78,10 +78,22 @@ const dom = (function () {
         let target = grid.target;
         pos1 = getCoordinates(target)[0];
         pos2 = getCoordinates(target)[1];
-        if (gamerShips.length > 0) {
+        if (
+          gamerShips.length > 0 &&
+          game.gamer.checkValidity(
+            pos1,
+            pos2,
+            currentShip,
+            directionButton.value
+          )
+        ) {
           game.gamer.placeShip(pos1, pos2, currentShip, directionButton.value);
           gamerShips.shift();
           currentShip = gamerShips[0];
+          let shipPositions = game.gamer.getShipsPositions();
+          for (let i = 0; i < shipPositions.length; i++) {
+            playerBoardDiv.children[shipPositions[i]].classList.add("ship");
+          }
           console.log(gamerBoard);
         }
       }

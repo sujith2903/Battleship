@@ -28,6 +28,24 @@ const gameBoard = function () {
   }
 
   function checkValidity(pos1, pos2, ship, direction) {
+    let index = indexFinder(pos1, pos2);
+
+    if (direction == "Horizontal") {
+      for (let i = 0; i < ship.length; i++) {
+        if (shipPosition.includes(index + i)) {
+          return false;
+        }
+      }
+    }
+
+    if (direction == "Vertical") {
+      for (let i = 0; i < ship.length; i++) {
+        if (shipPosition.includes(index + i * 10)) {
+          return false;
+        }
+      }
+    }
+
     if (direction == "Horizontal" && pos2 + ship.length > 10) {
       return false;
     }
@@ -47,11 +65,8 @@ const gameBoard = function () {
 
       for (let i = 0; i < ship.length; i++) {
         board[index + i].name = ship.shipName;
-        if (!shipPosition.includes(index + i)) {
-          shipPosition.push(index + i);
-          console.log(shipPosition);
-        }
-        ships.push(ship);
+        shipPosition.push(index + i);
+        console.log(shipPosition);
       }
     }
 
@@ -60,13 +75,11 @@ const gameBoard = function () {
 
       for (let i = 0; i < ship.length; i++) {
         board[index + i * 10].name = ship.shipName;
-        if (!shipPosition.includes(index + i)) {
-          shipPosition.push(index + i * 10);
-          console.log(shipPosition);
-        }
+        shipPosition.push(index + i * 10);
+        console.log(shipPosition);
       }
-      ships.push(ship);
     }
+    ships.push(ship);
   }
 
   function receiveAttack(pos1, pos2) {

@@ -4,11 +4,7 @@ import player from "./player";
 import game from "./game";
 
 const dom = (function () {
-  const carrier = document.querySelector(".carrier-name");
-  const battleship = document.querySelector(".battleship-name");
-  const cruiser = document.querySelector(".cruiser-name");
-  const submarine = document.querySelector(".submarine-name");
-  const destroyer = document.querySelector(".destroyer-name");
+  const display = document.querySelector(".display");
   const playerBoardDiv = document.querySelector(".player-board");
   const computerBoardDiv = document.querySelector(".computer-board");
   const directionButton = document.querySelector(".direction");
@@ -67,6 +63,32 @@ const dom = (function () {
   function addNonValidityColor(cell) {
     cell.classList.add("red");
   }
+
+  (function displayEvents() {
+    window.addEventListener("load", () => {
+      display.textContent = "Welcome to Battleship. Place your Carrier";
+    });
+
+    window.addEventListener("click", () => {
+      switch (gamerShips.length) {
+        case 4:
+          display.textContent = "Place your Battleship";
+          break;
+        case 3:
+          display.textContent = "Place your Cruiser";
+          break;
+        case 2:
+          display.textContent = "Place your Submarine";
+          break;
+        case 1:
+          display.textContent = "Place your Destroyer";
+          break;
+
+        default:
+          display.textContent = "hey";
+      }
+    });
+  })();
 
   (function playerBoardEvents() {
     let currentShip = gamerShips[0];

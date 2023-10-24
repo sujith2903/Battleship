@@ -17,6 +17,28 @@ const game = (function () {
   let turn = "gamer";
   let winner = "";
 
+  function gameLoop(pos1, pos2) {
+    if (turn == "gamer") {
+      computer.receiveAttack(pos1, pos2);
+      if (computer.isAllSunk()) {
+        winner = "gamer";
+      } else {
+        turn = "computer";
+      }
+    } else if (turn == "computer") {
+      player.receiveAttack(pos1, pos2);
+      if (player.isAllSunk()) {
+        winner = "computer";
+      } else {
+        turn = "gamer";
+      }
+    }
+  }
+
+  function getWinner() {
+    return winner;
+  }
+
   function getGamerBoard() {
     return gamerBoard;
   }
@@ -36,6 +58,8 @@ const game = (function () {
   return {
     gamer,
     computer,
+    gameLoop,
+    getWinner,
     getGamerBoard,
     getComputerBoard,
     getGamerShips,

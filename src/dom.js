@@ -176,6 +176,7 @@ const dom = (function () {
           "computer-ship"
         );
       }
+      console.log(computerBoard);
     });
   })();
 

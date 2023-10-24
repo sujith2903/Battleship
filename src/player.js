@@ -9,7 +9,10 @@ const player = function () {
   let submarine = ship(3, "Submarine");
   let destroyer = ship(2, "Destroyer");
   let ships = [carrier, battleship, cruiser, submarine, destroyer];
-  let shotCoordinates = [];
+  let shotCoordinates = [
+    ...board.getAttackedPositions(),
+    ...board.getMissedPositions(),
+  ];
 
   function randomAttack() {
     let x = Math.floor(Math.random() * 10);

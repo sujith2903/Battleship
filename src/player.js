@@ -18,6 +18,27 @@ const player = function () {
     return [x, y];
   }
 
+  function randomPlacement(ship) {
+    let coordinates = randomAttack();
+    let pos1 = coordinates[0];
+    let pos2 = coordinates[1];
+    let direction = "";
+
+    let randomDirection = Math.floor(Math.random() * 2);
+
+    if (randomDirection == 1) {
+      direction = "Horizontal";
+    } else {
+      direction = "Vertical";
+    }
+
+    if (board.checkValidity(pos1, pos2, ship, direction)) {
+      board.placeShip(pos1, pos2, ship, direction);
+    } else {
+      randomPlacement(ship);
+    }
+  }
+
   function getBoard() {
     return board;
   }
@@ -32,6 +53,7 @@ const player = function () {
 
   return {
     randomAttack,
+    randomPlacement,
     getBoard,
     getShips,
     getShotCoordinates,

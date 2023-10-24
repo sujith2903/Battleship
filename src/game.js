@@ -14,6 +14,9 @@ const game = (function () {
   let gamerShips = gamer.getShips();
   let computerShips = computer.getShips();
 
+  let turn = "gamer";
+  let winner = "";
+
   function getGamerBoard() {
     return gamerBoard;
   }

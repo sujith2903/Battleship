@@ -160,6 +160,17 @@ const dom = (function () {
     }
   });
 
+  (function computerBoardEvents() {
+    let currentShip = computerShips[0];
+    window.addEventListener("load", () => {
+      while (computerShips.length > 0) {
+        game.computer.randomPlacement(currentShip);
+        computerShips.shift();
+        currentShip = computerShips[0];
+      }
+    });
+  })();
+
   return {
     hideDisplay,
     showDisplay,

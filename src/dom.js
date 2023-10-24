@@ -114,7 +114,9 @@ const dom = (function () {
           currentShip = gamerShips[0];
           let shipPositions = game.gamer.getShipsPositions();
           for (let i = 0; i < shipPositions.length; i++) {
-            playerBoardDiv.children[shipPositions[i]].classList.add("ship");
+            playerBoardDiv.children[shipPositions[i]].classList.add(
+              "player-ship"
+            );
           }
           console.log(gamerBoard);
         }
@@ -167,6 +169,12 @@ const dom = (function () {
         game.computer.randomPlacement(currentShip);
         computerShips.shift();
         currentShip = computerShips[0];
+      }
+      let shipPositions = game.computer.getShipsPositions();
+      for (let i = 0; i < shipPositions.length; i++) {
+        computerBoardDiv.children[shipPositions[i]].classList.add(
+          "computer-ship"
+        );
       }
     });
   })();

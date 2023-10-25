@@ -33,3 +33,13 @@
 .player-ship{
   background-color: blue
 }
+
+.attacked::after{
+  content: "X";
+  background-color: red;
+}
+
+.missed::after{
+  content: "O";
+  background-color: black;
+}

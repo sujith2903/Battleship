@@ -37,7 +37,6 @@ const player = function () {
       randomAttack(player);
     } else {
       player.receiveAttack(pos1, pos2);
-      console.log("test");
     }
   }
 

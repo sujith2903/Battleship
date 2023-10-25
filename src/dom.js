@@ -200,6 +200,28 @@ const dom = (function () {
         }
       }
     });
+
+    window.addEventListener("click", () => {
+      let gamerMissedPos = game.gamer.getMissedPositions();
+      let computerMissedPos = game.computer.getMissedPositions();
+      let gamerAttackedPos = game.gamer.getAttackedPositions();
+      let computerAttackedPos = game.computer.getAttackedPositions();
+
+      for (let i = 0; i < gamerMissedPos.length; i++) {
+        playerBoardDiv.children[gamerMissedPos[i]].classList.add("missed");
+      }
+      for (let i = 0; i < computerMissedPos.length; i++) {
+        computerBoardDiv.children[computerMissedPos[i]].classList.add("missed");
+      }
+      for (let i = 0; i < gamerAttackedPos.length; i++) {
+        playerBoardDiv.children[gamerAttackedPos[i]].classList.add("attacked");
+      }
+      for (let i = 0; i < computerAttackedPos.length; i++) {
+        computerBoardDiv.children[computerAttackedPos[i]].classList.add(
+          "attacked"
+        );
+      }
+    });
   })();
 
   return {

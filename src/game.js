@@ -26,8 +26,6 @@ const game = (function () {
       } else {
         turn = "computer";
         input = [];
-        console.log(computer.getAttackedPositions());
-        console.log(computer.getShipsPositions());
       }
     }
     if (turn == "computer") {
@@ -36,8 +34,6 @@ const game = (function () {
         winner = "computer";
       } else {
         turn = "gamer";
-        console.log(gamer.getAttackedPositions());
-        console.log(gamer.getShipsPositions());
       }
     }
     console.log(winner);

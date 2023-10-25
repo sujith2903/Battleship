@@ -14,15 +14,35 @@ const player = function () {
     ...board.getMissedPositions(),
   ];
 
-  function randomAttack() {
+  function indexFinder(pos1, pos2) {
+    let index = pos1 * 10 + pos2;
+    return index;
+  }
+
+  function randomCoordinates() {
     let x = Math.floor(Math.random() * 10);
     let y = Math.floor(Math.random() * 10);
 
     return [x, y];
   }
 
+  function randomAttack(player) {
+    let coordinates = randomCoordinates();
+    let pos1 = coordinates[0];
+    let pos2 = coordinates[1];
+
+    let index = indexFinder(pos1, pos2);
+
+    if (player.getShotCoordinates().includes(index)) {
+      randomAttack(player);
+    } else {
+      player.receiveAttack(pos1, pos2);
+      console.log("test");
+    }
+  }
+
   function randomPlacement(ship) {
-    let coordinates = randomAttack();
+    let coordinates = randomCoordinates();
     let pos1 = coordinates[0];
     let pos2 = coordinates[1];
     let direction = "";

@@ -16,23 +16,39 @@ const game = (function () {
 
   let turn = "gamer";
   let winner = "";
+  let input = [];
 
-  function gameLoop(pos1, pos2) {
+  function gameLoop() {
     if (turn == "gamer") {
-      computer.receiveAttack(pos1, pos2);
+      computer.receiveAttack(input[0], input[1]);
       if (computer.isAllSunk()) {
         winner = "gamer";
       } else {
         turn = "computer";
+        input = [];
+        console.log(computer.getAttackedPositions());
+        console.log(computer.getShipsPositions());
       }
-    } else if (turn == "computer") {
-      player.receiveAttack(pos1, pos2);
-      if (player.isAllSunk()) {
+    }
+    if (turn == "computer") {
+      computer.randomAttack(gamer);
+      if (gamer.isAllSunk()) {
         winner = "computer";
       } else {
         turn = "gamer";
+        console.log(gamer.getAttackedPositions());
+        console.log(gamer.getShipsPositions());
       }
     }
+    console.log(winner);
+  }
+
+  function setInput(coordinates) {
+    input = coordinates;
+  }
+
+  function getTurn() {
+    return turn;
   }
 
   function getWinner() {
@@ -58,7 +74,9 @@ const game = (function () {
   return {
     gamer,
     computer,
+    setInput,
     gameLoop,
+    getTurn,
     getWinner,
     getGamerBoard,
     getComputerBoard,

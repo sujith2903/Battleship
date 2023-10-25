@@ -176,7 +176,29 @@ const dom = (function () {
           "computer-ship"
         );
       }
-      console.log(computerBoard);
+    });
+  })();
+
+  (function gameLoopEvents() {
+    computerBoardDiv.addEventListener("click", (grid) => {
+      if (
+        gamerShips.length == 0 &&
+        grid.target.classList.contains("computer-board")
+      ) {
+        let target = grid.target;
+        let index = parseInt(target.classList[0]);
+        let pos1 = getCoordinates(target)[0];
+        let pos2 = getCoordinates(target)[1];
+
+        if (
+          !game.computer.getShotCoordinates().includes(index) &&
+          game.getWinner() == "" &&
+          gamerShips.length == 0
+        ) {
+          game.setInput([pos1, pos2]);
+          game.gameLoop();
+        }
+      }
     });
   })();
 

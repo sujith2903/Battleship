@@ -66,7 +66,6 @@ const gameBoard = function () {
       for (let i = 0; i < ship.length; i++) {
         board[index + i].name = ship.shipName;
         shipPosition.push(index + i);
-        console.log(shipPosition);
       }
     }
 
@@ -76,7 +75,6 @@ const gameBoard = function () {
       for (let i = 0; i < ship.length; i++) {
         board[index + i * 10].name = ship.shipName;
         shipPosition.push(index + i * 10);
-        console.log(shipPosition);
       }
     }
     ships.push(ship);
@@ -86,10 +84,14 @@ const gameBoard = function () {
     let index = indexFinder(pos1, pos2);
 
     if (board[index].name != null) {
-      attackedPosition.push(index);
-      findShip(board[index].name).hit();
+      if (!attackedPosition.includes(index)) {
+        attackedPosition.push(index);
+        findShip(board[index].name).hit();
+      }
     } else {
-      missedAttack.push(index);
+      if (!missedAttack.includes(index)) {
+        missedAttack.push(index);
+      }
     }
   }
 

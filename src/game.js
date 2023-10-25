@@ -14,26 +14,26 @@ const game = (function () {
   let gamerShips = gamer.getShips();
   let computerShips = computer.getShips();
 
-  let turn = "gamer";
+  let turn = "Gamer";
   let winner = "";
   let input = [];
 
   function gameLoop() {
-    if (turn == "gamer") {
+    if (turn == "Gamer") {
       computer.receiveAttack(input[0], input[1]);
       if (computer.isAllSunk()) {
-        winner = "gamer";
+        winner = "Gamer";
       } else {
-        turn = "computer";
+        turn = "Computer";
         input = [];
       }
     }
-    if (turn == "computer") {
+    if (turn == "Computer") {
       computer.randomAttack(gamer);
       if (gamer.isAllSunk()) {
-        winner = "computer";
+        winner = "Computer";
       } else {
-        turn = "gamer";
+        turn = "Gamer";
       }
     }
     console.log(winner);

@@ -84,8 +84,12 @@ const dom = (function () {
           display.textContent = "Place your Destroyer";
           break;
 
-        default:
-          display.textContent = "hey";
+        case 0:
+          if (game.getWinner() == "") {
+            display.textContent = `${game.getTurn()}'s Turn`;
+          } else {
+            display.textContent = `${game.getWinner()} Won`;
+          }
       }
     });
   })();

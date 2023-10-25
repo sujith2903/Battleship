@@ -9,10 +9,6 @@ const player = function () {
   let submarine = ship(3, "Submarine");
   let destroyer = ship(2, "Destroyer");
   let ships = [carrier, battleship, cruiser, submarine, destroyer];
-  let shotCoordinates = [
-    ...board.getAttackedPositions(),
-    ...board.getMissedPositions(),
-  ];
 
   function indexFinder(pos1, pos2) {
     let index = pos1 * 10 + pos2;
@@ -70,6 +66,9 @@ const player = function () {
   }
 
   function getShotCoordinates() {
+    let attacked = board.getAttackedPositions();
+    let missed = board.getMissedPositions();
+    let shotCoordinates = [...attacked, ...missed];
     return shotCoordinates;
   }
 

@@ -239,15 +239,7 @@ const dom = (function () {
 
   (function reset() {
     resetButton.addEventListener("click", () => {
-      dom;
-      game;
-      while (playerBoardDiv.hasChildNodes()) {
-        playerBoardDiv.removeChild(playerBoardDiv.firstChild);
-      }
-      while (computerBoardDiv.hasChildNodes()) {
-        computerBoardDiv.removeChild(computerBoardDiv.firstChild);
-      }
-      dom.createGameBoards();
+      location.reload();
     });
   })();
 

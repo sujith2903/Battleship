@@ -56,13 +56,24 @@ body{
   background-color: blue
 }
 
-.attacked::after{
-  content: "X";
-  background-color: red;
+.attacked{
+  background-color: rgb(224, 46, 46,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.missed::after{
-  content: "O";
+svg{
+  fill:black;
+  width: 2.2rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.missed{
   background-color: black;
+  border: 1px solid white;
 }
 

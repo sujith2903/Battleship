@@ -8,21 +8,12 @@ const dom = (function () {
   const playerBoardDiv = document.querySelector(".player-board");
   const computerBoardDiv = document.querySelector(".computer-board");
   const directionButton = document.querySelector(".direction");
+  const resetButton = document.querySelector(".reset");
 
   let gamerBoard = game.getGamerBoard();
   let computerBoard = game.getComputerBoard();
   let gamerShips = [...game.getGamerShips()];
   let computerShips = [...game.getComputerShips()];
-
-  function hideDisplay(element) {
-    element.classList.remove("show");
-    element.classList.add("hide");
-  }
-
-  function showDisplay(element) {
-    element.classList.remove("hide");
-    element.classList.add("show");
-  }
 
   function createGameBoards() {
     for (let i = 0; i < gamerBoard.length; i++) {
@@ -168,7 +159,7 @@ const dom = (function () {
 
   (function computerBoardEvents() {
     let currentShip = computerShips[0];
-    window.addEventListener("load", () => {
+    window.addEventListener("click", () => {
       while (computerShips.length > 0) {
         game.computer.randomPlacement(currentShip);
         computerShips.shift();
@@ -228,9 +219,21 @@ const dom = (function () {
     });
   })();
 
+  (function reset() {
+    resetButton.addEventListener("click", () => {
+      dom;
+      game;
+      while (playerBoardDiv.hasChildNodes()) {
+        playerBoardDiv.removeChild(playerBoardDiv.firstChild);
+      }
+      while (computerBoardDiv.hasChildNodes()) {
+        computerBoardDiv.removeChild(computerBoardDiv.firstChild);
+      }
+      dom.createGameBoards();
+    });
+  })();
+
   return {
-    hideDisplay,
-    showDisplay,
     createGameBoards,
   };
 })();
